@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1J6YzADJfcUzQfdRy5mul06TkqV0FgcY0FS6Je5l98XXbSPTCmJTSArfLaHn12ZaRDXk3Nwon1sJ0v8nqNZKZA==",
+  "dgSpecHash": "U/tBUcSMPhvEGnDNVabJZBAE5Qf1wZb3Fviwi2WKsoX4vJ439PdeBq6Z3bxv+AqYzvlXJ80lajI4o+W3eXkWaQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ivan.garcia\\Desktop\\ASPNetCore6\\WebAPIAutores\\WebAPIAutores.csproj",
+  "projectFilePath": "E:\\ASPNetCore6\\WebAPIAutores\\WebAPIAutores.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ivan.garcia\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

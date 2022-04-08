@@ -20,19 +20,40 @@ namespace WebAPIAutores.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Autor>>> Get()
+        public async Task<List<Autor>> Get()
         {
-            return await context.Autores.Include(x => x.Libros).ToListAsync();
+            return  await context.Autores.Include(x => x.Libros).ToListAsync();
         }
 
         [HttpGet("primero")]
-        public async Task<ActionResult<Autor>> PrimerAutor()
+        public async Task<ActionResult<Autor>> PrimerAutor([FromHeader] int valor, [FromQuery] string nombre)
         {
             return await context.Autores.FirstOrDefaultAsync();
         }
 
+        [HttpGet("{id:int}/{param2=persona}")]
+        public async Task<ActionResult<Autor>> Get(int id, string param2)
+        {
+            var autor  = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
+            if(autor == null)
+            {
+                return NotFound();
+            }
+            return autor;
+        }
+        [HttpGet("{nombre}")]
+        public async Task<ActionResult<Autor>> Get([FromRoute] string nombre)
+        {
+            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Nombre.Contains(nombre));
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            return autor;
+        }
+
         [HttpPost]
-        public async Task<ActionResult> Post(Autor autor)
+        public async Task<ActionResult> Post([FromBody] Autor autor)
         {
             context.Add(autor);
             await context.SaveChangesAsync();
