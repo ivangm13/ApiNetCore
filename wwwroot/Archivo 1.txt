@@ -1,0 +1,16 @@
+Proceso iniciado
+Proceso finalizado
+Proceso iniciado
+Proceso en ejecución: 11/04/2022 10:36:51
+Proceso en ejecución: 11/04/2022 10:36:56
+Proceso en ejecución: 11/04/2022 10:37:01
+Proceso en ejecución: 11/04/2022 10:37:06
+Proceso en ejecución: 11/04/2022 10:37:11
+Proceso en ejecución: 11/04/2022 10:37:16
+Proceso en ejecución: 11/04/2022 10:37:21
+Proceso en ejecución: 11/04/2022 10:37:26
+Proceso en ejecución: 11/04/2022 10:37:31
+Proceso en ejecución: 11/04/2022 10:37:36
+Proceso en ejecución: 11/04/2022 10:37:41
+Proceso en ejecución: 11/04/2022 10:37:46
+Proceso finalizado

@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "X1gI8MujnmeYWBzaY59hUDcFjFfL1z7zb0R8vYSDM6w=",
+  "Hash": "+rAVUaly+BGqRG9qVODxSDB60xXrqpmL4KYcO2OAPBg=",
   "Source": "WebAPIAutores",
   "BasePath": "_content/WebAPIAutores",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "WebAPIAutores\\wwwroot",
+      "Source": "WebAPIAutores",
+      "ContentRoot": "E:\\ASPNetCore6\\WebAPIAutores\\wwwroot\\",
+      "BasePath": "_content/WebAPIAutores",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\ASPNetCore6\\WebAPIAutores\\wwwroot\\Archivo 1.txt",
+      "SourceId": "WebAPIAutores",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\ASPNetCore6\\WebAPIAutores\\wwwroot\\",
+      "BasePath": "_content/WebAPIAutores",
+      "RelativePath": "Archivo 1.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Archivo 1.txt"
+    }
+  ]
 }

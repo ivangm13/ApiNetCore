@@ -8,8 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using WebAPIAutores.Controllers;
+using WebAPIAutores.Filtros;
 using WebAPIAutores.Middlewares;
-using WebAPIAutores.Servicios;
 
 namespace WebAPIAutores
 {
@@ -26,19 +26,15 @@ namespace WebAPIAutores
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers().AddJsonOptions(x =>
+            services.AddControllers(opciones => {
+                opciones.Filters.Add(typeof(FiltroDeExcepcion));
+            }).AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
 
-            services.AddTransient<IServicio, ServicioA>();
 
-            services.AddTransient<ServicioTransient>();
-            services.AddScoped<ServicioScoped>();
-            services.AddSingleton<ServicioSingleton>();
-
-            services.AddResponseCaching();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 
@@ -53,16 +49,9 @@ namespace WebAPIAutores
         {
 
 
-            // app.UseMiddleware<LoguearRespuestaHttpMiddleware>();
             app.UseLoguearRespuestaHttp();
 
-            app.Map("/ruta1", app =>
-            {
-                app.Run(async contexto =>
-                {
-                    await contexto.Response.WriteAsync("Estoy interceptando la tubería");
-                });
-            });
+            
             
 
             if (env.IsDevelopment())
@@ -76,7 +65,6 @@ namespace WebAPIAutores
 
             app.UseRouting();
 
-            app.UseResponseCaching();
 
             app.UseAuthorization();
 

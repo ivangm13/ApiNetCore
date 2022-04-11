@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPIAutores.Entidades;
-using WebAPIAutores.Servicios;
+using WebAPIAutores.Filtros;
 
 namespace WebAPIAutores.Controllers
 {
@@ -15,50 +15,21 @@ namespace WebAPIAutores.Controllers
     public class AutoresController: ControllerBase
     {
         private readonly ApplicationDbContext context;
-        private readonly IServicio servicio;
-        private readonly ServicioTransient servicioTransient;
-        private readonly ServicioScoped servicioScoped;
-        private readonly ServicioSingleton servicioSingleton;
-        private readonly ILogger<AutoresController> logger;
 
-        public AutoresController(ApplicationDbContext context, IServicio servicio,
-            ServicioTransient servicioTransient, ServicioScoped servicioScoped, ServicioSingleton servicioSingleton,ILogger<AutoresController> logger)
+        public AutoresController(ApplicationDbContext context)
         {
             this.context = context;
-            this.servicio = servicio;
-            this.servicioTransient = servicioTransient;
-            this.servicioScoped = servicioScoped;
-            this.servicioSingleton = servicioSingleton;
-            this.logger = logger;
         }
 
-        [HttpGet("GUID")]
-        [ResponseCache(Duration = 10)]
-        public ActionResult ObtenerGuids()
-        {
-            return Ok(new
-            {
-                AutoresController_Transient = servicioTransient.Guid,
-                ServicioA_Transient = servicio.ObtenerTransient(),
-                AutoresController_Scoped = servicioTransient.Guid,
-                ServicioA_Scoped = servicio.ObtenerScoped(),
-                AutoresController_Singleton = servicioTransient.Guid,
-                ServicioA_Singleton = servicio.ObtenerSingleton()
-
-
-            });
-        }
+        
 
 
         [HttpGet]
-        [HttpGet("listado")]
-        [ResponseCache(Duration = 10)]
-        [Authorize]
+
+        // [Authorize]
         public async Task<List<Autor>> Get()
         {
-            logger.LogInformation("Estamos obteniendo los autores");
-            servicio.RealizarTarea();
-            return  await context.Autores.Include(x => x.Libros).ToListAsync();
+            return  await context.Autores.ToListAsync();
         }
 
         [HttpGet("primero")]
@@ -67,8 +38,8 @@ namespace WebAPIAutores.Controllers
             return await context.Autores.FirstOrDefaultAsync();
         }
 
-        [HttpGet("{id:int}/{param2=persona}")]
-        public async Task<ActionResult<Autor>> Get(int id, string param2)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Autor>> Get(int id)
         {
             var autor  = await context.Autores.FirstOrDefaultAsync(x => x.Id == id);
             if(autor == null)
