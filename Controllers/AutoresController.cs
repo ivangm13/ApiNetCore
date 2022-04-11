@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPIAutores.Entidades;
+using WebAPIAutores.Servicios;
 
 namespace WebAPIAutores.Controllers
 {
@@ -13,15 +15,49 @@ namespace WebAPIAutores.Controllers
     public class AutoresController: ControllerBase
     {
         private readonly ApplicationDbContext context;
+        private readonly IServicio servicio;
+        private readonly ServicioTransient servicioTransient;
+        private readonly ServicioScoped servicioScoped;
+        private readonly ServicioSingleton servicioSingleton;
+        private readonly ILogger<AutoresController> logger;
 
-        public AutoresController(ApplicationDbContext context)
+        public AutoresController(ApplicationDbContext context, IServicio servicio,
+            ServicioTransient servicioTransient, ServicioScoped servicioScoped, ServicioSingleton servicioSingleton,ILogger<AutoresController> logger)
         {
             this.context = context;
+            this.servicio = servicio;
+            this.servicioTransient = servicioTransient;
+            this.servicioScoped = servicioScoped;
+            this.servicioSingleton = servicioSingleton;
+            this.logger = logger;
         }
 
+        [HttpGet("GUID")]
+        [ResponseCache(Duration = 10)]
+        public ActionResult ObtenerGuids()
+        {
+            return Ok(new
+            {
+                AutoresController_Transient = servicioTransient.Guid,
+                ServicioA_Transient = servicio.ObtenerTransient(),
+                AutoresController_Scoped = servicioTransient.Guid,
+                ServicioA_Scoped = servicio.ObtenerScoped(),
+                AutoresController_Singleton = servicioTransient.Guid,
+                ServicioA_Singleton = servicio.ObtenerSingleton()
+
+
+            });
+        }
+
+
         [HttpGet]
+        [HttpGet("listado")]
+        [ResponseCache(Duration = 10)]
+        [Authorize]
         public async Task<List<Autor>> Get()
         {
+            logger.LogInformation("Estamos obteniendo los autores");
+            servicio.RealizarTarea();
             return  await context.Autores.Include(x => x.Libros).ToListAsync();
         }
 
@@ -55,6 +91,13 @@ namespace WebAPIAutores.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Autor autor)
         {
+            var existeAutorMismoNombre = await context.Autores.AnyAsync(x => x.Nombre == autor.Nombre);
+
+            if (existeAutorMismoNombre)
+            {
+                return BadRequest($"Ya existe un autor con el nombre {autor.Nombre}");
+            }
+
             context.Add(autor);
             await context.SaveChangesAsync();
             return Ok();

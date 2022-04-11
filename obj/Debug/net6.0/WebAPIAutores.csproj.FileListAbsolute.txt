@@ -178,3 +178,4 @@ E:\ASPNetCore6\WebAPIAutores\obj\Debug\net6.0\WebAPIAutores.dll
 E:\ASPNetCore6\WebAPIAutores\obj\Debug\net6.0\ref\WebAPIAutores.dll
 E:\ASPNetCore6\WebAPIAutores\obj\Debug\net6.0\WebAPIAutores.pdb
 E:\ASPNetCore6\WebAPIAutores\obj\Debug\net6.0\WebAPIAutores.genruntimeconfig.cache
+E:\ASPNetCore6\WebAPIAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
