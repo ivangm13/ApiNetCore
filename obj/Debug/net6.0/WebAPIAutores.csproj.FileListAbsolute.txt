@@ -180,3 +180,5 @@ E:\ASPNetCore6\WebAPIAutores\obj\Debug\net6.0\WebAPIAutores.pdb
 E:\ASPNetCore6\WebAPIAutores\obj\Debug\net6.0\WebAPIAutores.genruntimeconfig.cache
 E:\ASPNetCore6\WebAPIAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\ASPNetCore6\WebAPIAutores\bin\Debug\net6.0\WebAPIAutores.staticwebassets.runtime.json
+E:\ASPNetCore6\WebAPIAutores\bin\Debug\net6.0\AutoMapper.dll
+E:\ASPNetCore6\WebAPIAutores\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
