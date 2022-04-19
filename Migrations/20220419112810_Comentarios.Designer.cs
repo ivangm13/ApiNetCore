@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPIAutores;
 
@@ -10,9 +11,10 @@ using WebAPIAutores;
 namespace WebAPIAutores.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220419112810_Comentarios")]
+    partial class Comentarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,24 +39,6 @@ namespace WebAPIAutores.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Autores");
-                });
-
-            modelBuilder.Entity("WebAPIAutores.Entidades.AutorLibro", b =>
-                {
-                    b.Property<int>("AutorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LibroId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Orden")
-                        .HasColumnType("int");
-
-                    b.HasKey("AutorId", "LibroId");
-
-                    b.HasIndex("LibroId");
-
-                    b.ToTable("AutoresLibros");
                 });
 
             modelBuilder.Entity("WebAPIAutores.Entidades.Comentario", b =>
@@ -95,25 +79,6 @@ namespace WebAPIAutores.Migrations
                     b.ToTable("Libros");
                 });
 
-            modelBuilder.Entity("WebAPIAutores.Entidades.AutorLibro", b =>
-                {
-                    b.HasOne("WebAPIAutores.Entidades.Autor", "Autor")
-                        .WithMany("AutoresLibros")
-                        .HasForeignKey("AutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebAPIAutores.Entidades.Libro", "Libro")
-                        .WithMany("AutoresLibros")
-                        .HasForeignKey("LibroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Autor");
-
-                    b.Navigation("Libro");
-                });
-
             modelBuilder.Entity("WebAPIAutores.Entidades.Comentario", b =>
                 {
                     b.HasOne("WebAPIAutores.Entidades.Libro", "Libro")
@@ -125,15 +90,8 @@ namespace WebAPIAutores.Migrations
                     b.Navigation("Libro");
                 });
 
-            modelBuilder.Entity("WebAPIAutores.Entidades.Autor", b =>
-                {
-                    b.Navigation("AutoresLibros");
-                });
-
             modelBuilder.Entity("WebAPIAutores.Entidades.Libro", b =>
                 {
-                    b.Navigation("AutoresLibros");
-
                     b.Navigation("Comentarios");
                 });
 #pragma warning restore 612, 618
