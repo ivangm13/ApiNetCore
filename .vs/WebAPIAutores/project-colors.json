@@ -5,7 +5,12 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Archivos varios",
       "ColorIndex": -1
+    },
+    "58a98e62-2a51-41c7-948f-7d569da57a19": {
+      "ProjectGuid": "58a98e62-2a51-41c7-948f-7d569da57a19",
+      "DisplayName": "WebAPIAutores",
+      "ColorIndex": 0
     }
   },
-  "NextColorIndex": 0
+  "NextColorIndex": 1
 }
